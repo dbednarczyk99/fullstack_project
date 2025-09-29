@@ -1,4 +1,9 @@
 {
+  "name": "fullstack_project-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Daniel Bednarczyk",
+  "private": true,
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
@@ -15,5 +20,10 @@
   },
   "scripts": {
     "start": "nodemon server.js"
+  },
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0"
   }
 }

@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-function App() {
+import "./styles/bootstrap.scss";
+import "./styles/global.scss";
+import "./styles/settings.scss";
+
+import MainLayout from "./components/layout/MainLayout/MainLayout";
+import HomePage from "./components/pages/HomePage/HomePage";
+// import LoginPage from './components/pages/LoginPage/LoginPage';
+// import RegisterPage from './components/pages/RegisterPage/RegisterPage';
+// import ViewAdvert from './components/pages/ViewAdvert/ViewAdvert';
+// import AddAdvert from './components/pages/AddAdvert/AddAdvert';
+// import EditAdvert from './components/pages/EditAdvert/EditAdvert';
+// import SearchAdvert from './components/pages/SearchAdvert/SearchAdvert';
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(loadProducts());
+  // }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainLayout>
+      <Switch>
+        <Route exact path={"/"} component={HomePage} />
+        {/* <Route exact path={'/login'} component={LoginPage} />
+        <Route exact path={'/register'} component={RegisterPage} />
+        <Route exact path={'/ad/:adId'} component={ViewAdvert} />
+        <Route exact path={'/ad/add'} component={AddAdvert} />
+        <Route exact path={'/ad/edit/:adId'} component={EditAdvert} />
+        <Route exact path={'/search/:searchPhrase'} component={SearchAdvert} /> */}
+      </Switch>
+    </MainLayout>
   );
-}
+};
 
 export default App;
