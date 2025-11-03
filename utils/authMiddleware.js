@@ -8,11 +8,11 @@ const authMiddleware = async (req, res, next) => {
       const sessionRecord = await Session.findOne();
       if (!sessionRecord)
         return res.status(401).send({ message: 'You are not authorized' });
-      const sessionData = JSON.parse(sessionRecord.session);
-      req.session.user = {
-        id: sessionData.user.id,
-        login: sessionData.user.login,
-      }
+      // const sessionData = JSON.parse(sessionRecord.session);
+      // req.session.user = {
+      //   id: sessionData.user.id,
+      //   login: sessionData.user.login,
+      // }
       next();
     }
     catch (err) {

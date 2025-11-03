@@ -26,6 +26,7 @@ exports.register = async (req, res) => {
     }
   } catch (err) {
     if ( req.file ) fs.unlinkSync(req.file.path);
+    //console.log('error: ', err.code);
     res.status(500).send({ message: err.message });
   }
 };
@@ -51,6 +52,9 @@ exports.login = async (req, res) => {
         }
       }
     }
+    else {
+      res.status(400).send({ message: 'Bad request' });
+    }
   } catch (err) {
     res.status(500).send({ message: err.message })
   }
@@ -60,10 +64,26 @@ exports.logout = async (req, res, next) => {
   try {
     if (process.env.NODE_ENV !== "production") {
       await Session.deleteMany({});
-      res.status(200).send({ message: 'Session closed!'}); 
+      res.clearCookie("connect.sid", { path: "/" });
+      return res.status(200).send({ message: 'Session closed!'}); 
+    } 
+    
+    else if (req.session.user) {
+      req.session.destroy(err => {
+        if (err) {
+          return next(err);
+        } else {
+          res.clearCookie("connect.sid", { path: "/" });
+          return res.status(200).send({ message: 'Session closed!'});
+        }
+      });
+    }
+
+    else {
+      return res.status(200).send({ message: 'No active session.' });
     }
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    return res.status(500).send({ message: err.message });
   }
 };
 

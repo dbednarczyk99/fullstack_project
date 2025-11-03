@@ -9,7 +9,7 @@ router.get('/ads', AdsMethods.getAll);
 router.get('/ads/:id', AdsMethods.getById);
 router.post('/ads', uploadAdImage.single('adImage'), AdsMethods.post);
 router.delete('/ads/:id', AdsMethods.delete);
-router.put('/ads/:id', AdsMethods.modify);
-//router.get('/ads/search/:searchPhrase', AdsMethods.searchResults);
+router.put('/ads/:id', uploadAdImage.single('adImage'), AdsMethods.modify);
+router.get('/ads/search/:searchPhrase', AdsMethods.getSearch);
 
 module.exports = router;
